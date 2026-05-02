@@ -61,7 +61,7 @@
 
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 主服务框架搭建 | ⏳ | 0% | backend/main-service | Spring Boot |
+| 主服务框架搭建 | 🔵 | 100% | backend/main-service | Spring Boot 3.2.5 + MyBatis-Plus 3.5.5，已完成基础框架 |
 | AI助手服务搭建 | ⏳ | 0% | backend/ai-assistant | Spring Boot + Spring AI |
 
 ### 前端
@@ -69,7 +69,7 @@
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
 | 小程序框架搭建 | ⏳ | 0% | frontend/miniapp | UniApp |
-| 管理后台框架搭建 | ⏳ | 0% | frontend/web | Vue |
+| 管理后台框架搭建 | ✅ | 100% | frontend/web | Vue 3 + Vite + Element Plus + Pinia，已完成基础框架 |
 
 ---
 
@@ -77,13 +77,15 @@
 
 > 新 Session 重点关注此部分
 
-- **当前阶段**：系统设计完成，准备开发实现
-- **当前任务**：搭建项目骨架（后端主服务 + AI服务 + 前端）
+- **当前阶段**：开发实现中
+- **当前任务**：完成后端主服务开发、AI 助手服务搭建、小程序框架搭建
+- **已完成**：
+  - ✅ 后端主服务框架搭建（Spring Boot 3.2.5 + MyBatis-Plus 3.5.5）
+  - ✅ 管理后台框架搭建（Vue 3 + Vite + Element Plus + Pinia）
 - **下一步**：
-  1. 创建后端主服务 Spring Boot 项目
+  1. 完善后端主服务业务模块开发
   2. 创建 AI 助手服务 Spring Boot 项目
   3. 创建小程序 UniApp 项目
-  4. 创建管理后台 Vue 项目
 
 ---
 

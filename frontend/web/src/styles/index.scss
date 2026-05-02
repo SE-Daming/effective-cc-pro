@@ -1,0 +1,143 @@
+// 全局样式
+@use './variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  font-size: 14px;
+  color: #303133;
+  background-color: #f0f2f5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c4cc;
+  border-radius: 3px;
+
+  &:hover {
+    background: #909399;
+  }
+}
+
+// Element Plus 样式覆盖
+.el-card {
+  border-radius: 8px;
+}
+
+.el-button {
+  border-radius: 4px;
+}
+
+.el-table {
+  .el-table__header-wrapper {
+    th {
+      background-color: #f5f7fa !important;
+    }
+  }
+}
+
+// 通用类
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: #409EFF;
+}
+
+.text-success {
+  color: #67C23A;
+}
+
+.text-warning {
+  color: #E6A23C;
+}
+
+.text-danger {
+  color: #F56C6C;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+// 页面容器
+.page-container {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #303133;
+    }
+  }
+
+  .search-form {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+  }
+
+  .table-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
