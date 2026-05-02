@@ -23,18 +23,18 @@
 
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 用户模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/login, stores/user | 微信登录、个人信息 |
-| 电影模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/movie | 电影列表、详情、影评 |
-| 影院模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/cinema | 影院列表、详情、影厅、排片查询 |
-| 排片模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/order/seat | 座位选择、座位锁定 |
-| 订单模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/order | 选座购票、订单列表、订单详情、取票码、退票 |
-| 优惠券模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/mine/coupons | 领券、使用、查询 |
-| 卖品模块 | ⏳ | 0% | frontend/miniapp | 卖品列表、购买 |
-| 收藏模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/mine/favorites | 收藏/取消收藏 |
-| 首页模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/index | Banner、热门推荐、正在热映、即将上映 |
-| 搜索模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/search | 电影/影院搜索、搜索历史、热门搜索 |
-| 基础框架 | ✅ | 100% | frontend/miniapp/maoyan | 网络请求封装、Pinia状态管理、公共组件 |
-| 我的模块 | ✅ | 100% | frontend/miniapp/maoyan/pages/mine | 用户信息、订单入口、收藏入口、优惠券入口 |
+| 用户模块 | ✅ | 100% | frontend/miniapp/pages/login, stores/user | 微信登录、个人信息 |
+| 电影模块 | ✅ | 100% | frontend/miniapp/pages/movie | 电影列表、详情、影评 |
+| 影院模块 | ✅ | 100% | frontend/miniapp/pages/cinema | 影院列表、详情、影厅、排片查询 |
+| 排片模块 | ✅ | 100% | frontend/miniapp/pages/order/seat | 座位选择、座位锁定 |
+| 订单模块 | ✅ | 100% | frontend/miniapp/pages/order | 选座购票、订单列表、订单详情、取票码、退票 |
+| 优惠券模块 | ✅ | 100% | frontend/miniapp/pages/mine/coupons | 领券、使用、查询 |
+| 卖品模块 | ✅ | 100% | frontend/miniapp/pages/snack | 卖品列表、购买、购物车、订单确认 |
+| 收藏模块 | ✅ | 100% | frontend/miniapp/pages/mine/favorites | 收藏/取消收藏 |
+| 首页模块 | ✅ | 100% | frontend/miniapp/pages/index | Banner、热门推荐、正在热映、即将上映 |
+| 搜索模块 | ✅ | 100% | frontend/miniapp/pages/search | 电影/影院搜索、搜索历史、热门搜索 |
+| 基础框架 | ✅ | 100% | frontend/miniapp | 网络请求封装、Pinia状态管理、公共组件 |
+| 我的模块 | ✅ | 100% | frontend/miniapp/pages/mine | 用户信息、订单入口、收藏入口、优惠券入口 |
 
 ### B端管理后台
 
@@ -106,7 +106,7 @@
 > 新 Session 重点关注此部分
 
 - **当前阶段**：开发实现中
-- **当前任务**：完成小程序影院和订单模块开发
+- **当前任务**：完成小程序卖品模块开发
 - **已完成**：
   - ✅ 后端主服务框架搭建（Spring Boot 3.2.5 + MyBatis-Plus 3.5.5）
   - ✅ 管理后台框架搭建（Vue 3 + Vite + Element Plus + Pinia）
@@ -131,10 +131,9 @@
   - ✅ 小程序登录页面（微信登录）
   - ✅ 小程序收藏页面（电影收藏、影院收藏）
   - ✅ 小程序优惠券页面（可用优惠券、已使用、已过期）
+  - ✅ 小程序卖品模块（卖品列表、分类筛选、购物车、订单确认、订单详情）
 - **下一步**：
-  1. 开发卖品模块
-  2. 开发搜索模块
-  3. 开发AI助手模块
+  1. 开发AI助手模块
 
 ---
 

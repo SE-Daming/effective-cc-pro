@@ -103,6 +103,30 @@
 				"navigationBarBackgroundColor": "#ffffff",
 				"navigationBarTextStyle": "black"
 			}
+		},
+		{
+			"path": "pages/snack/snack",
+			"style": {
+				"navigationBarTitleText": "卖品",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/snack/confirm",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/snack/order-detail",
+			"style": {
+				"navigationBarTitleText": "卖品订单详情",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
 		}
 	],
 	"globalStyle": {
