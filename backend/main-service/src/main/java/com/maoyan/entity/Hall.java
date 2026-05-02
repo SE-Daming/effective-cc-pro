@@ -41,11 +41,13 @@ public class Hall implements Serializable {
     /**
      * 行数
      */
+    @TableField("`rows`")
     private Integer rows;
 
     /**
      * 列数
      */
+    @TableField("`cols`")
     private Integer cols;
 
     /**
