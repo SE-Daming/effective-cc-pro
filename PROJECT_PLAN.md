@@ -23,16 +23,16 @@
 
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 用户模块 | ✅ | 100% | controller/api/user | 微信登录、个人信息、搜索历史 |
-| 电影模块 | ⏳ | 0% | - | 电影列表、详情、影评 |
-| 影院模块 | ⏳ | 0% | - | 影院列表、详情、影厅 |
-| 排片模块 | ⏳ | 0% | - | 排片查询、座位选择 |
-| 订单模块 | ⏳ | 0% | - | 选座购票、支付、退票 |
-| 优惠券模块 | ✅ | 100% | controller/api/coupon | 领券、使用、查询 |
-| 卖品模块 | ✅ | 100% | controller/api/snack | 卖品列表、购买 |
-| 收藏模块 | ✅ | 100% | controller/api/favorite | 收藏/取消收藏 |
-| 首页模块 | ✅ | 100% | controller/api/home | Banner、热门推荐 |
-| 搜索模块 | ⏳ | 0% | - | 电影/影院搜索 |
+| 用户模块 | ⏳ | 0% | frontend/miniapp | 微信登录、个人信息、搜索历史 |
+| 电影模块 | ⏳ | 0% | frontend/miniapp | 电影列表、详情、影评 |
+| 影院模块 | ⏳ | 0% | frontend/miniapp | 影院列表、详情、影厅 |
+| 排片模块 | ⏳ | 0% | frontend/miniapp | 排片查询、座位选择 |
+| 订单模块 | ⏳ | 0% | frontend/miniapp | 选座购票、支付、退票 |
+| 优惠券模块 | ⏳ | 0% | frontend/miniapp | 领券、使用、查询 |
+| 卖品模块 | ⏳ | 0% | frontend/miniapp | 卖品列表、购买 |
+| 收藏模块 | ⏳ | 0% | frontend/miniapp | 收藏/取消收藏 |
+| 首页模块 | ⏳ | 0% | frontend/miniapp | Banner、热门推荐 |
+| 搜索模块 | ⏳ | 0% | frontend/miniapp | 电影/影院搜索 |
 
 ### B端管理后台
 
