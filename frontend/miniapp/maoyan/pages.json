@@ -1,0 +1,141 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "猫眼电影",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/movie/movie",
+			"style": {
+				"navigationBarTitleText": "电影",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path": "pages/movie/detail",
+			"style": {
+				"navigationBarTitleText": "电影详情",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path": "pages/cinema/cinema",
+			"style": {
+				"navigationBarTitleText": "影院",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/cinema/detail",
+			"style": {
+				"navigationBarTitleText": "影院详情",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/order/seat",
+			"style": {
+				"navigationBarTitleText": "选择座位",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/order/list",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/order/detail",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/mine/favorites",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/mine/coupons",
+			"style": {
+				"navigationBarTitleText": "我的优惠券",
+				"navigationBarBackgroundColor": "#ff5a00",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "black"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "猫眼电影",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f5f5f5"
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#ff5a00",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "black",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/images/tab-home.png",
+				"selectedIconPath": "static/images/tab-home-active.png"
+			},
+			{
+				"pagePath": "pages/cinema/cinema",
+				"text": "影院",
+				"iconPath": "static/images/tab-cinema.png",
+				"selectedIconPath": "static/images/tab-cinema-active.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "static/images/tab-user.png",
+				"selectedIconPath": "static/images/tab-user-active.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
