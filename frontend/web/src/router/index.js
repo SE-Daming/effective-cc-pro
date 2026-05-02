@@ -212,6 +212,21 @@ const routes = [
             meta: { title: '影院排行' }
           }
         ]
+      },
+      // 影评管理
+      {
+        path: 'review',
+        name: 'Review',
+        redirect: '/review/list',
+        meta: { title: '影评管理', icon: 'ChatDotSquare' },
+        children: [
+          {
+            path: 'list',
+            name: 'ReviewList',
+            component: () => import('@/views/review/list.vue'),
+            meta: { title: '影评列表' }
+          }
+        ]
       }
     ]
   },
