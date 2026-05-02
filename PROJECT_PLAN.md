@@ -71,7 +71,7 @@
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
 | 用户模块 | ⏳ | 0% | controller/api/user | 微信登录、个人信息、搜索历史 |
-| 电影模块 | ⏳ | 0% | controller/api/movie | 电影列表、详情、影评 |
+| 电影模块 | ✅ | 100% | controller/api/movie | 电影列表、详情、影评 |
 | 影院模块 | ✅ | 100% | controller/api/cinema | 影院列表、详情、影厅、排片查询 |
 | 排片模块 | ⏳ | 0% | controller/api/schedule | 排片查询、座位锁定 |
 | 订单模块 | ⏳ | 0% | controller/api/order | 选座购票、支付、退票 |
@@ -80,7 +80,7 @@
 | 收藏模块 | ⏳ | 0% | controller/api/favorite | 收藏/取消收藏 |
 | 首页模块 | ⏳ | 0% | controller/api/home | Banner、热门推荐 |
 | 管理员认证 | ✅ | 100% | controller/admin/AdminAuthController | 登录、获取信息、登出、JWT认证 |
-| 电影管理 | ⏳ | 0% | controller/admin/movie | 电影CRUD、分类管理 |
+| 电影管理 | ✅ | 100% | controller/admin/movie | 电影CRUD、分类管理 |
 | 影院管理 | ✅ | 100% | controller/admin/cinema | 影院CRUD、影厅CRUD、座位自动生成 |
 | 排片管理 | ⏳ | 0% | controller/admin/schedule | 排片CRUD、冲突检测 |
 | 订单管理 | ⏳ | 0% | controller/admin/order | 订单查看、退款审核 |
@@ -108,6 +108,7 @@
 - **已完成**：
   - ✅ 后端主服务框架搭建（Spring Boot 3.2.5 + MyBatis-Plus 3.5.5）
   - ✅ 管理后台框架搭建（Vue 3 + Vite + Element Plus + Pinia）
+  - ✅ 电影模块后端接口（C端：正在热映、即将上映、搜索、详情、影评；B端：电影CRUD、分类管理）
 - **下一步**：
   1. 完善后端主服务业务模块开发
   2. 创建 AI 助手服务 Spring Boot 项目
