@@ -1,0 +1,139 @@
+- generic [ref=e1]:
+  - generic [ref=e48]:
+    - complementary [ref=e49]:
+      - generic [ref=e50]:
+        - img "logo" [ref=e51]
+        - generic [ref=e52]: 电影票务后台
+      - menubar [ref=e53]:
+        - menuitem "首页" [ref=e54] [cursor=pointer]:
+          - img [ref=e56]
+          - text: 首页
+        - menuitem "电影管理" [expanded] [ref=e58]:
+          - generic [ref=e59] [cursor=pointer]:
+            - img [ref=e61]
+            - generic [ref=e64]: 电影管理
+            - img [ref=e66]
+          - menu [ref=e489]:
+            - menuitem "电影列表" [active] [ref=e490] [cursor=pointer]
+        - menuitem "影院管理" [ref=e68]:
+          - generic [ref=e69] [cursor=pointer]:
+            - img [ref=e71]
+            - generic [ref=e75]: 影院管理
+            - img [ref=e77]
+        - menuitem "排片管理" [ref=e79]:
+          - generic [ref=e80] [cursor=pointer]:
+            - img [ref=e82]
+            - generic [ref=e84]: 排片管理
+            - img [ref=e86]
+        - menuitem "订单管理" [ref=e88]:
+          - generic [ref=e89] [cursor=pointer]:
+            - img [ref=e91]
+            - generic [ref=e93]: 订单管理
+            - img [ref=e95]
+        - menuitem "用户管理" [ref=e97]:
+          - generic [ref=e98] [cursor=pointer]:
+            - img [ref=e100]
+            - generic [ref=e102]: 用户管理
+            - img [ref=e104]
+        - menuitem "优惠券管理" [ref=e106]:
+          - generic [ref=e107] [cursor=pointer]:
+            - img [ref=e109]
+            - generic [ref=e111]: 优惠券管理
+            - img [ref=e113]
+        - menuitem "卖品管理" [ref=e115]:
+          - generic [ref=e116] [cursor=pointer]:
+            - img [ref=e118]
+            - generic [ref=e120]: 卖品管理
+            - img [ref=e122]
+        - menuitem "数据统计" [ref=e124]:
+          - generic [ref=e125] [cursor=pointer]:
+            - img [ref=e127]
+            - generic [ref=e129]: 数据统计
+            - img [ref=e131]
+    - generic [ref=e133]:
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - img [ref=e137] [cursor=pointer]
+          - navigation "面包屑" [ref=e139]:
+            - generic [ref=e491]:
+              - link "电影管理" [ref=e492]
+              - text: /
+            - link "电影列表" [ref=e494]
+        - button "超级管理员" [ref=e144] [cursor=pointer]:
+          - img [ref=e147]
+          - generic [ref=e149]: 超级管理员
+          - img [ref=e151]
+      - main [ref=e153]:
+        - generic [ref=e495]:
+          - generic [ref=e496]:
+            - heading "电影列表" [level=3] [ref=e497]
+            - button "新增电影" [ref=e498] [cursor=pointer]:
+              - generic [ref=e499]:
+                - img [ref=e501]
+                - text: 新增电影
+          - generic [ref=e504]:
+            - generic [ref=e505]:
+              - generic [ref=e506]: 关键词
+              - textbox "关键词" [ref=e510]:
+                - /placeholder: 电影名称
+            - generic [ref=e511]:
+              - generic [ref=e512]: 状态
+              - generic [ref=e515] [cursor=pointer]:
+                - generic:
+                  - combobox "状态" [ref=e517]
+                  - generic: 请选择
+                - img [ref=e520]
+            - generic [ref=e523]:
+              - button "搜索" [ref=e524] [cursor=pointer]:
+                - generic [ref=e525]: 搜索
+              - button "重置" [ref=e526] [cursor=pointer]:
+                - generic [ref=e527]: 重置
+          - generic [ref=e528]:
+            - generic [ref=e530]:
+              - table [ref=e532]:
+                - rowgroup [ref=e543]:
+                  - row "ID 电影名称 导演 时长 分类 上映日期 评分 状态 操作" [ref=e544]:
+                    - columnheader "ID" [ref=e545]:
+                      - generic [ref=e546]: ID
+                    - columnheader "电影名称" [ref=e547]:
+                      - generic [ref=e548]: 电影名称
+                    - columnheader "导演" [ref=e549]:
+                      - generic [ref=e550]: 导演
+                    - columnheader "时长" [ref=e551]:
+                      - generic [ref=e552]: 时长
+                    - columnheader "分类" [ref=e553]:
+                      - generic [ref=e554]: 分类
+                    - columnheader "上映日期" [ref=e555]:
+                      - generic [ref=e556]: 上映日期
+                    - columnheader "评分" [ref=e557]:
+                      - generic [ref=e558]: 评分
+                    - columnheader "状态" [ref=e559]:
+                      - generic [ref=e560]: 状态
+                    - columnheader "操作" [ref=e561]:
+                      - generic [ref=e562]: 操作
+              - generic [ref=e566]:
+                - table:
+                  - rowgroup
+                - generic [ref=e568]: 暂无数据
+            - generic [ref=e570]:
+              - generic [ref=e571]: 共 0 条
+              - generic [ref=e574] [cursor=pointer]:
+                - generic:
+                  - combobox [ref=e576]
+                  - generic [ref=e577]: 10条/页
+                - img [ref=e580]
+              - button "上一页" [disabled] [ref=e582]:
+                - generic:
+                  - img
+              - list [ref=e583]:
+                - listitem "第 1 页" [ref=e584]: "1"
+              - button "下一页" [disabled] [ref=e585]:
+                - generic:
+                  - img
+              - generic [ref=e586]:
+                - generic [ref=e587]: 前往
+                - spinbutton "页" [ref=e590]: "1"
+                - generic [ref=e591]: 页
+  - alert [ref=e592]:
+    - img [ref=e594]
+    - paragraph [ref=e596]: 服务器内部错误

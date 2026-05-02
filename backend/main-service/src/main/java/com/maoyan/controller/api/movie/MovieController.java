@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Tag(name = "C端-电影接口", description = "电影列表、详情、影评等接口")
 @RestController
-@RequestMapping("/api/movies")
+@RequestMapping("/movies")
 @RequiredArgsConstructor
 public class MovieController {
 

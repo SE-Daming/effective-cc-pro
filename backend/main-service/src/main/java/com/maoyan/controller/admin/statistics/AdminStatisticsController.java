@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Tag(name = "B端-数据统计", description = "销售统计、排行榜等接口")
 @RestController
-@RequestMapping("/api/admin/statistics")
+@RequestMapping("/admin/statistics")
 @RequiredArgsConstructor
 public class AdminStatisticsController {
 

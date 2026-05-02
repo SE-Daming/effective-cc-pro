@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Tag(name = "C端-影院", description = "影院相关接口")
 @RestController
-@RequestMapping("/api/cinemas")
+@RequestMapping("/cinemas")
 @RequiredArgsConstructor
 public class CinemaController {
 

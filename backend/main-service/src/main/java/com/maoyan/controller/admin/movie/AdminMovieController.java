@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "B端-电影管理", description = "电影CRUD接口")
 @RestController
-@RequestMapping("/api/admin/movies")
+@RequestMapping("/admin/movies")
 @RequiredArgsConstructor
 public class AdminMovieController {
 

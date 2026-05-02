@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "优惠券", description = "优惠券领取、查询相关接口")
 @RestController
-@RequestMapping("/api/coupons")
+@RequestMapping("/coupons")
 @RequiredArgsConstructor
 public class CouponController {
 

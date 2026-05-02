@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Tag(name = "C端-首页接口", description = "Banner、热门推荐等接口")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 @RequiredArgsConstructor
 public class HomeController {
 

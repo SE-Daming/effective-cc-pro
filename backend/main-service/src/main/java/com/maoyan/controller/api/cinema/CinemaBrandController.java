@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Tag(name = "C端-影院品牌", description = "影院品牌相关接口")
 @RestController
-@RequestMapping("/api/cinema-brands")
+@RequestMapping("/cinema-brands")
 @RequiredArgsConstructor
 public class CinemaBrandController {
 

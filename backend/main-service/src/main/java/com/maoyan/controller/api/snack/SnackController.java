@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Tag(name = "C端-卖品接口", description = "卖品分类、列表、购买等接口")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 @RequiredArgsConstructor
 public class SnackController {
 

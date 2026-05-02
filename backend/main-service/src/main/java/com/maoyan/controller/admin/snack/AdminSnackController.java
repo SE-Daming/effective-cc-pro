@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "B端-卖品管理", description = "卖品CRUD接口")
 @RestController
-@RequestMapping("/api/admin/snacks")
+@RequestMapping("/admin/snacks")
 @RequiredArgsConstructor
 public class AdminSnackController {
 

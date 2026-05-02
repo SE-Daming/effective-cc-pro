@@ -1,0 +1,229 @@
+- generic [ref=e48]:
+  - complementary [ref=e49]:
+    - generic [ref=e50]:
+      - img "logo" [ref=e51]
+      - generic [ref=e52]: 电影票务后台
+    - menubar [ref=e53]:
+      - menuitem "首页" [ref=e54] [cursor=pointer]:
+        - img [ref=e56]
+        - text: 首页
+      - menuitem "电影管理" [expanded] [ref=e58]:
+        - generic [ref=e59] [cursor=pointer]:
+          - img [ref=e61]
+          - generic [ref=e64]: 电影管理
+          - img [ref=e66]
+        - menu [ref=e489]:
+          - menuitem "电影列表" [ref=e490] [cursor=pointer]
+      - menuitem "影院管理" [ref=e68]:
+        - generic [ref=e69] [cursor=pointer]:
+          - img [ref=e71]
+          - generic [ref=e75]: 影院管理
+          - img [ref=e77]
+      - menuitem "排片管理" [ref=e79]:
+        - generic [ref=e80] [cursor=pointer]:
+          - img [ref=e82]
+          - generic [ref=e84]: 排片管理
+          - img [ref=e86]
+      - menuitem "订单管理" [ref=e88]:
+        - generic [ref=e89] [cursor=pointer]:
+          - img [ref=e91]
+          - generic [ref=e93]: 订单管理
+          - img [ref=e95]
+      - menuitem "用户管理" [ref=e97]:
+        - generic [ref=e98] [cursor=pointer]:
+          - img [ref=e100]
+          - generic [ref=e102]: 用户管理
+          - img [ref=e104]
+      - menuitem "优惠券管理" [ref=e106]:
+        - generic [ref=e107] [cursor=pointer]:
+          - img [ref=e109]
+          - generic [ref=e111]: 优惠券管理
+          - img [ref=e113]
+      - menuitem "卖品管理" [ref=e115]:
+        - generic [ref=e116] [cursor=pointer]:
+          - img [ref=e118]
+          - generic [ref=e120]: 卖品管理
+          - img [ref=e122]
+      - menuitem "数据统计" [ref=e124]:
+        - generic [ref=e125] [cursor=pointer]:
+          - img [ref=e127]
+          - generic [ref=e129]: 数据统计
+          - img [ref=e131]
+  - generic [ref=e133]:
+    - generic [ref=e134]:
+      - generic [ref=e135]:
+        - img [ref=e137] [cursor=pointer]
+        - navigation "面包屑" [ref=e139]:
+          - link "首页" [ref=e141]
+      - button "超级管理员" [ref=e144] [cursor=pointer]:
+        - img [ref=e147]
+        - generic [ref=e149]: 超级管理员
+        - img [ref=e151]
+    - main [ref=e153]:
+      - generic [ref=e154]:
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - heading "欢迎回来，超级管理员" [level=2] [ref=e159]
+            - paragraph [ref=e160]: 今天是 2026年5月2日 星期六，祝您工作愉快！
+          - img [ref=e163]
+        - generic [ref=e165]:
+          - generic [ref=e169]:
+            - img [ref=e172]
+            - generic [ref=e174]:
+              - paragraph [ref=e175]: "0"
+              - paragraph [ref=e176]: 今日订单
+          - generic [ref=e180]:
+            - img [ref=e183]
+            - generic [ref=e187]:
+              - paragraph [ref=e188]: ¥0
+              - paragraph [ref=e189]: 今日销售额
+          - generic [ref=e193]:
+            - img [ref=e196]
+            - generic [ref=e198]:
+              - paragraph [ref=e199]: "0"
+              - paragraph [ref=e200]: 新增用户
+          - generic [ref=e204]:
+            - img [ref=e207]
+            - generic [ref=e210]:
+              - paragraph [ref=e211]: "0"
+              - paragraph [ref=e212]: 今日售票
+        - generic [ref=e213]:
+          - generic [ref=e215]:
+            - generic [ref=e217]:
+              - generic [ref=e218]: 待处理事项
+              - button "查看全部" [ref=e219] [cursor=pointer]:
+                - generic [ref=e220]: 查看全部
+            - generic [ref=e222]:
+              - generic [ref=e223]:
+                - generic [ref=e224]:
+                  - text: 待审核退款
+                  - superscript [ref=e225]: "3"
+                - button "去处理" [ref=e226] [cursor=pointer]:
+                  - generic [ref=e227]: 去处理
+              - generic [ref=e228]:
+                - generic [ref=e229]:
+                  - text: 待处理投诉
+                  - superscript [ref=e230]: "5"
+                - button "去处理" [ref=e231] [cursor=pointer]:
+                  - generic [ref=e232]: 去处理
+              - generic [ref=e233]:
+                - generic [ref=e234]:
+                  - text: 库存预警
+                  - superscript [ref=e235]: "2"
+                - button "去处理" [ref=e236] [cursor=pointer]:
+                  - generic [ref=e237]: 去处理
+          - generic [ref=e239]:
+            - generic [ref=e241]:
+              - generic [ref=e242]: 热门电影 TOP 5
+              - button "查看更多" [ref=e243] [cursor=pointer]:
+                - generic [ref=e244]: 查看更多
+            - generic [ref=e247]:
+              - table [ref=e249]:
+                - rowgroup [ref=e255]:
+                  - row "# 电影名称 评分 票房" [ref=e256]:
+                    - columnheader "#" [ref=e257]:
+                      - generic [ref=e258]: "#"
+                    - columnheader "电影名称" [ref=e259]:
+                      - generic [ref=e260]: 电影名称
+                    - columnheader "评分" [ref=e261]:
+                      - generic [ref=e262]: 评分
+                    - columnheader "票房" [ref=e263]:
+                      - generic [ref=e264]: 票房
+              - table [ref=e269]:
+                - rowgroup [ref=e275]:
+                  - row "1 流浪地球3 9.2 50,000万" [ref=e276]:
+                    - cell "1" [ref=e277]:
+                      - generic [ref=e279]: "1"
+                    - cell "流浪地球3" [ref=e280]:
+                      - generic [ref=e281]: 流浪地球3
+                    - cell "9.2" [ref=e282]:
+                      - slider "rating" [disabled] [ref=e284]:
+                        - img [ref=e287]
+                        - img [ref=e291]
+                        - img [ref=e295]
+                        - img [ref=e299]
+                        - img [ref=e303]
+                        - generic [ref=e305]: "9.2"
+                    - cell "50,000万" [ref=e306]:
+                      - generic [ref=e307]: 50,000万
+                  - row "2 满江红 8.5 45,000万" [ref=e308]:
+                    - cell "2" [ref=e309]:
+                      - generic [ref=e311]: "2"
+                    - cell "满江红" [ref=e312]:
+                      - generic [ref=e313]: 满江红
+                    - cell "8.5" [ref=e314]:
+                      - slider "rating" [disabled] [ref=e316]:
+                        - img [ref=e319]
+                        - img [ref=e323]
+                        - img [ref=e327]
+                        - img [ref=e331]
+                        - img [ref=e335]
+                        - generic [ref=e337]: "8.5"
+                    - cell "45,000万" [ref=e338]:
+                      - generic [ref=e339]: 45,000万
+                  - row "3 熊出没·重返地球 8 38,000万" [ref=e340]:
+                    - cell "3" [ref=e341]:
+                      - generic [ref=e343]: "3"
+                    - cell "熊出没·重返地球" [ref=e344]:
+                      - generic [ref=e345]: 熊出没·重返地球
+                    - cell "8" [ref=e346]:
+                      - slider "rating" [disabled] [ref=e348]:
+                        - img [ref=e351]
+                        - img [ref=e355]
+                        - img [ref=e359]
+                        - img [ref=e363]
+                        - img [ref=e367]
+                        - generic [ref=e369]: "8"
+                    - cell "38,000万" [ref=e370]:
+                      - generic [ref=e371]: 38,000万
+                  - row "4 无名 7.8 32,000万" [ref=e372]:
+                    - cell "4" [ref=e373]:
+                      - generic [ref=e375]: "4"
+                    - cell "无名" [ref=e376]:
+                      - generic [ref=e377]: 无名
+                    - cell "7.8" [ref=e378]:
+                      - slider "rating" [disabled] [ref=e380]:
+                        - img [ref=e383]
+                        - img [ref=e387]
+                        - img [ref=e391]
+                        - img [ref=e395]
+                        - img [ref=e399]
+                        - generic [ref=e401]: "7.8"
+                    - cell "32,000万" [ref=e402]:
+                      - generic [ref=e403]: 32,000万
+                  - row "5 深海 7.5 28,000万" [ref=e404]:
+                    - cell "5" [ref=e405]:
+                      - generic [ref=e407]: "5"
+                    - cell "深海" [ref=e408]:
+                      - generic [ref=e409]: 深海
+                    - cell "7.5" [ref=e410]:
+                      - slider "rating" [disabled] [ref=e412]:
+                        - img [ref=e415]
+                        - img [ref=e419]
+                        - img [ref=e423]
+                        - img [ref=e427]
+                        - img [ref=e431]
+                        - generic [ref=e433]: "7.5"
+                    - cell "28,000万" [ref=e434]:
+                      - generic [ref=e435]: 28,000万
+        - generic [ref=e436]:
+          - generic [ref=e437]: 快捷操作
+          - generic [ref=e439]:
+            - generic [ref=e441] [cursor=pointer]:
+              - img [ref=e443]
+              - generic [ref=e446]: 新增电影
+            - generic [ref=e448] [cursor=pointer]:
+              - img [ref=e450]
+              - generic [ref=e454]: 新增影院
+            - generic [ref=e456] [cursor=pointer]:
+              - img [ref=e458]
+              - generic [ref=e460]: 添加排片
+            - generic [ref=e462] [cursor=pointer]:
+              - img [ref=e464]
+              - generic [ref=e466]: 订单管理
+            - generic [ref=e468] [cursor=pointer]:
+              - img [ref=e470]
+              - generic [ref=e472]: 用户管理
+            - generic [ref=e474] [cursor=pointer]:
+              - img [ref=e476]
+              - generic [ref=e478]: 数据统计

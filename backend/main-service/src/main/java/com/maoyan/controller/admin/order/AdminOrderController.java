@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "B端-订单管理", description = "订单查看、退款审核相关接口")
 @RestController
-@RequestMapping("/api/admin/orders")
+@RequestMapping("/admin/orders")
 @RequiredArgsConstructor
 public class AdminOrderController {
 

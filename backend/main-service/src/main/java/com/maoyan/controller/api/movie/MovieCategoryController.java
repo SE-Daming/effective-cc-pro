@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Tag(name = "C端-电影分类接口", description = "电影分类列表接口")
 @RestController
-@RequestMapping("/api/movie-categories")
+@RequestMapping("/movie-categories")
 @RequiredArgsConstructor
 public class MovieCategoryController {
 
