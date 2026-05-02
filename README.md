@@ -1,46 +1,20 @@
-# 项目说明
+# 仿猫眼电影票务平台
 
-> 待补充：项目名称和简介
+> 毕业设计项目
 
----
+## 简介
 
-## 项目简介
-
-待补充
+仿猫眼/淘票票的电影票务平台，包含 C 端购票小程序、B 端管理后台、AI 智能助手三大模块。
 
 ## 技术栈
 
-| 层次 | 技术 |
-|------|------|
-| 后端主服务 | Spring Boot |
-| AI 助手模块 | Spring Boot（独立服务） |
-| 前端 Web | Vue |
-| 前端小程序 | UniApp |
+Spring Boot + Vue + UniApp
 
-## 目录结构
+## 文档入口
 
-```
-project-root/
-├── backend/           # 后端服务
-│   ├── main-service/  # Spring Boot 主服务
-│   └── ai-assistant/  # Spring Boot AI 助手模块
-├── frontend/          # 前端
-│   ├── web/           # Vue Web 端
-│   └── miniapp/       # UniApp 小程序端
-├── tests/             # 测试代码
-├── docs/              # 项目文档
-└── assets/            # 资源文件
-```
-
-## 快速开始
-
-> 待各子项目搭建后补充
-
-## 文档
-
-- [项目约定](./CLAUDE.md)
-- [项目计划](./PROJECT_PLAN.md)
-- [变更日志](./CHANGELOG.md)
+- [CLAUDE.md](./CLAUDE.md) - 项目约定（开发规范、工作流程）
+- [PROJECT_PLAN.md](./PROJECT_PLAN.md) - 项目计划（进度追踪）
+- [docs/](./docs/) - 详细文档目录
 
 ---
 

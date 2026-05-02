@@ -20,8 +20,6 @@
 | 模块 | 表名 | 说明 |
 |------|------|------|
 | **用户模块** | user | 用户表 |
-| | member_level | 会员等级配置表 |
-| | user_points_log | 用户积分流水表 |
 | | search_history | 搜索历史表 |
 | **电影模块** | movie | 电影表 |
 | | movie_actor | 电影演员表 |
@@ -41,8 +39,6 @@
 | **卖品模块** | snack | 卖品表 |
 | | snack_category | 卖品分类表 |
 | **收藏模块** | user_favorite | 用户收藏表 |
-| **消息模块** | message_template | 消息模板表 |
-| | message_log | 消息发送记录表 |
 | **管理员模块** | admin | 管理员表 |
 | | admin_role | 角色表 |
 | | admin_operation_log | 操作日志表 |
@@ -61,22 +57,22 @@
 │ nickname    │     │ poster      │     │ address     │
 │ avatar      │     │ director    │     │ phone       │
 │ phone       │     │ duration    │     │ brand_id    │
-│ level_id    │──┐  │ status      │  ┌──│ location    │
-│ points      │  │  │ release_date│  │  │ facilities  │
-│ ...         │  │  │ ...         │  │  │ ...         │
-└─────────────┘  │  └─────────────┘  │  └─────────────┘
-       │         │         │         │         │
-       │         │         │         │         │
-       ▼         │         ▼         │         ▼
-┌─────────────┐  │  ┌─────────────┐  │  ┌─────────────┐
-│member_level │◄─┘  │movie_review │  │  │    hall     │
+│ status      │     │ status      │  ┌──│ location    │
+│ ...         │     │ release_date│  │  │ facilities  │
+└─────────────┘     │ ...         │  │  │ ...         │
+       │            └─────────────┘  │  └─────────────┘
+       │                   │         │         │
+       │                   │         │         │
+       ▼                   ▼         │         ▼
+┌─────────────┐     ┌─────────────┐  │  ┌─────────────┐
+│search_history│    │movie_review │  │  │    hall     │
 ├─────────────┤     ├─────────────┤  │  ├─────────────┤
 │ id          │     │ id          │  │  │ id          │
-│ name        │     │ user_id     │  │  │ cinema_id   │◄─┘
-│ min_amount  │     │ movie_id    │  │  │ name        │
-│ discount    │     │ score       │  │  │ type        │
-│ ...         │     │ content     │  │  │ rows        │
-└─────────────┘     │ ...         │  │  │ cols        │
+│ user_id     │     │ user_id     │  │  │ cinema_id   │◄─┘
+│ keyword     │     │ movie_id    │  │  │ name        │
+│ ...         │     │ score       │  │  │ type        │
+└─────────────┘     │ content     │  │  │ rows        │
+                    │ ...         │  │  │ cols        │
                     └─────────────┘  │  │ ...         │
                                      │  └─────────────┘
                                      │         │
@@ -140,12 +136,7 @@
 | avatar | varchar(255) | YES | NULL | 头像URL |
 | phone | varchar(20) | YES | NULL | 手机号 |
 | gender | tinyint | YES | 0 | 性别：0未知 1男 2女 |
-| birthday | date | YES | NULL | 生日 |
-| level_id | int | YES | 1 | 会员等级ID |
-| points | int | YES | 0 | 当前积分 |
-| total_points | int | YES | 0 | 累计积分 |
 | total_consumption | decimal(10,2) | YES | 0.00 | 累计消费金额 |
-| level_expire_time | datetime | YES | NULL | 等级过期时间 |
 | last_login_time | datetime | YES | NULL | 最后登录时间 |
 | status | tinyint | YES | 1 | 状态：0禁用 1正常 |
 | create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
@@ -157,40 +148,18 @@
 - UNIQUE KEY uk_openid (openid)
 - KEY idx_phone (phone)
 
-#### member_level - 会员等级配置表
-
-| 字段 | 类型 | 空 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| id | int | NO | AUTO_INCREMENT | 主键 |
-| name | varchar(32) | NO | - | 等级名称 |
-| min_consumption | decimal(10,2) | NO | - | 升级最低消费金额 |
-| discount | decimal(3,2) | YES | 1.00 | 折扣（1.00=无折扣） |
-| points_rate | decimal(3,2) | YES | 1.00 | 积分倍率 |
-| retention_amount | decimal(10,2) | YES | 0.00 | 保级消费金额 |
-| benefits | text | YES | NULL | 权益说明JSON |
-| icon | varchar(255) | YES | NULL | 等级图标 |
-| sort | int | YES | 0 | 排序 |
-| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
-| update_time | datetime | YES | CURRENT_TIMESTAMP | 更新时间 |
-
-#### user_points_log - 用户积分流水表
+#### search_history - 搜索历史表
 
 | 字段 | 类型 | 空 | 默认值 | 说明 |
 |------|------|------|--------|------|
 | id | bigint | NO | AUTO_INCREMENT | 主键 |
 | user_id | bigint | NO | - | 用户ID |
-| type | tinyint | NO | - | 类型：1获取 2消费 3过期 |
-| points | int | NO | - | 积分数量（正数） |
-| balance | int | YES | - | 变更后余额 |
-| source | varchar(32) | YES | NULL | 来源：ORDER/REVIEW/LOGIN等 |
-| source_id | bigint | YES | NULL | 关联ID |
-| remark | varchar(255) | YES | NULL | 备注 |
-| expire_time | datetime | YES | NULL | 过期时间 |
+| keyword | varchar(64) | NO | - | 搜索关键词 |
+| type | tinyint | YES | 1 | 类型：1电影 2影院 |
 | create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
 
 **索引：**
 - KEY idx_user_id (user_id)
-- KEY idx_create_time (create_time)
 
 ---
 
@@ -364,7 +333,6 @@
 | end_time | time | YES | NULL | 结束时间 |
 | clean_duration | int | YES | 15 | 清洁时间（分钟） |
 | price | decimal(6,2) | NO | - | 票价 |
-| member_price | decimal(6,2) | YES | NULL | 会员价 |
 | total_seats | int | NO | - | 总座位数 |
 | sold_seats | int | YES | 0 | 已售座位数 |
 | status | tinyint | YES | 1 | 状态：0取消 1正常 |
@@ -392,10 +360,8 @@
 | cinema_id | bigint | YES | NULL | 影院ID |
 | total_amount | decimal(10,2) | NO | - | 订单总额 |
 | discount_amount | decimal(10,2) | YES | 0.00 | 优惠金额 |
-| points_amount | decimal(10,2) | YES | 0.00 | 积分抵扣金额 |
 | pay_amount | decimal(10,2) | NO | - | 实付金额 |
 | user_coupon_id | bigint | YES | NULL | 使用的用户优惠券ID |
-| use_points | int | YES | 0 | 使用积分数 |
 | status | tinyint | NO | 1 | 状态 |
 | pay_time | datetime | YES | NULL | 支付时间 |
 | pay_type | varchar(20) | YES | NULL | 支付方式 |
@@ -591,59 +557,9 @@
 **索引：**
 - UNIQUE KEY uk_user_target (user_id, target_type, target_id)
 
-#### search_history - 搜索历史表
-
-| 字段 | 类型 | 空 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| id | bigint | NO | AUTO_INCREMENT | 主键 |
-| user_id | bigint | NO | - | 用户ID |
-| keyword | varchar(128) | NO | - | 搜索关键词 |
-| type | tinyint | YES | 1 | 类型：1电影 2影院 |
-| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
-
-**索引：**
-- KEY idx_user_id (user_id)
-
 ---
 
-### 3.9 消息模块
-
-#### message_template - 消息模板表
-
-| 字段 | 类型 | 空 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| id | int | NO | AUTO_INCREMENT | 主键 |
-| code | varchar(32) | NO | - | 模板编码 |
-| name | varchar(64) | NO | - | 模板名称 |
-| type | varchar(20) | NO | - | 类型：subscribe/alert |
-| template_id | varchar(64) | YES | NULL | 微信模板ID |
-| content | text | YES | NULL | 模板内容 |
-| params | varchar(255) | YES | NULL | 参数说明 |
-| status | tinyint | YES | 1 | 状态 |
-| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
-
-**索引：**
-- UNIQUE KEY uk_code (code)
-
-#### message_log - 消息发送记录表
-
-| 字段 | 类型 | 空 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| id | bigint | NO | AUTO_INCREMENT | 主键 |
-| user_id | bigint | NO | - | 用户ID |
-| template_id | int | NO | - | 模板ID |
-| content | text | YES | NULL | 发送内容 |
-| status | tinyint | YES | 1 | 状态：1待发送 2成功 3失败 |
-| error_msg | varchar(255) | YES | NULL | 错误信息 |
-| send_time | datetime | YES | NULL | 发送时间 |
-| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
-
-**索引：**
-- KEY idx_user_id (user_id)
-
----
-
-### 3.10 管理员模块
+### 3.9 管理员模块
 
 #### admin - 管理员表
 
@@ -698,7 +614,7 @@
 
 ---
 
-### 3.11 其他
+### 3.10 其他
 
 #### banner - 轮播图表
 
@@ -766,7 +682,7 @@
 
 | 模块 | 表数量 |
 |------|--------|
-| 用户模块 | 4 |
+| 用户模块 | 2 |
 | 电影模块 | 4 |
 | 影院模块 | 4 |
 | 排片模块 | 1 |
@@ -774,13 +690,12 @@
 | 优惠券模块 | 2 |
 | 卖品模块 | 2 |
 | 收藏模块 | 1 |
-| 消息模块 | 2 |
 | 管理员模块 | 3 |
 | 其他 | 1 |
-| **总计** | **28** |
+| **总计** | **24** |
 
 ---
 
-*文档版本：v1.1*
+*文档版本：v1.2*
 *创建时间：2025-05-02*
 *最后更新：2025-05-02*
