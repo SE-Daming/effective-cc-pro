@@ -1,0 +1,60 @@
+# .gitignore
+
+# ==================== 后端 ====================
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Spring Boot
+*.log
+*.gz
+
+# 敏感配置
+application-dev.yml
+application-prod.yml
+*.local
+
+# ==================== 前端 ====================
+# Node
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 构建产物
+*.class
+*.jar
+*.war
+
+# 日志
+logs/
+*.log
+
+# 临时文件
+*.tmp
+*.temp
