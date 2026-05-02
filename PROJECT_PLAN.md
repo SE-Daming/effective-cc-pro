@@ -87,7 +87,7 @@
 | 用户管理 | ✅ | 100% | controller/admin/user | 用户查看、禁用 |
 | 优惠券管理 | ✅ | 100% | controller/admin/coupon | 优惠券CRUD、发放 |
 | 卖品管理 | ✅ | 100% | controller/admin/snack | 卖品CRUD、库存管理 |
-| 影评管理 | ⏳ | 0% | controller/admin/review | 影评审核、删除 |
+| 影评管理 | ✅ | 100% | controller/admin/review | 影评审核、删除 |
 | 数据统计 | ✅ | 100% | controller/admin/statistics | 销售统计、排行 |
 
 ### 前端

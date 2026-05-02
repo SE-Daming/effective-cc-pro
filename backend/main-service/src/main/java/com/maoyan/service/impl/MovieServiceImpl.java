@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maoyan.common.ResultCode;
+import com.maoyan.dto.movie.AdminReviewQueryDTO;
+import com.maoyan.dto.movie.AuditReviewRequest;
 import com.maoyan.dto.movie.MovieQueryDTO;
 import com.maoyan.dto.movie.MovieSaveDTO;
 import com.maoyan.dto.movie.ReviewCreateDTO;
@@ -38,6 +40,7 @@ public class MovieServiceImpl implements MovieService {
     private final MovieActorMapper movieActorMapper;
     private final MovieReviewMapper movieReviewMapper;
     private final UserFavoriteMapper userFavoriteMapper;
+    private final UserMapper userMapper;
     private final MovieCategoryService movieCategoryService;
 
     @Autowired(required = false)
@@ -328,6 +331,73 @@ public class MovieServiceImpl implements MovieService {
         movieMapper.deleteById(id);
     }
 
+    // ============== B端影评管理接口 ==============
+
+    @Override
+    public PageVO<AdminReviewListVO> listReviewsAdmin(AdminReviewQueryDTO queryDTO) {
+        LambdaQueryWrapper<MovieReview> wrapper = new LambdaQueryWrapper<>();
+
+        if (queryDTO.getMovieId() != null) {
+            wrapper.eq(MovieReview::getMovieId, queryDTO.getMovieId());
+        }
+        if (queryDTO.getUserId() != null) {
+            wrapper.eq(MovieReview::getUserId, queryDTO.getUserId());
+        }
+        if (queryDTO.getStatus() != null) {
+            wrapper.eq(MovieReview::getStatus, queryDTO.getStatus());
+        }
+        wrapper.orderByDesc(MovieReview::getCreateTime);
+
+        Page<MovieReview> page = movieReviewMapper.selectPage(
+                new Page<>(queryDTO.getPage(), queryDTO.getPageSize()),
+                wrapper
+        );
+
+        List<AdminReviewListVO> list = page.getRecords().stream()
+                .map(this::toAdminReviewListVO)
+                .collect(Collectors.toList());
+
+        return PageVO.of(list, page.getTotal(), (int) page.getCurrent(), (int) page.getSize());
+    }
+
+    @Override
+    public AdminReviewDetailVO getReviewDetailAdmin(Long id) {
+        MovieReview review = movieReviewMapper.selectById(id);
+        if (review == null) {
+            throw new BusinessException(ResultCode.NOT_FOUND.getCode(), "影评不存在");
+        }
+        return toAdminReviewDetailVO(review);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void auditReview(Long id, AuditReviewRequest request) {
+        MovieReview review = movieReviewMapper.selectById(id);
+        if (review == null) {
+            throw new BusinessException(ResultCode.NOT_FOUND.getCode(), "影评不存在");
+        }
+
+        review.setStatus(request.getStatus());
+        movieReviewMapper.updateById(review);
+
+        // 更新电影评分
+        updateMovieScore(review.getMovieId());
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteReviewAdmin(Long id) {
+        MovieReview review = movieReviewMapper.selectById(id);
+        if (review == null) {
+            throw new BusinessException(ResultCode.NOT_FOUND.getCode(), "影评不存在");
+        }
+
+        movieReviewMapper.deleteById(id);
+
+        // 更新电影评分
+        updateMovieScore(review.getMovieId());
+    }
+
     // ============== 私有方法 ==============
 
     private PageVO<MovieListVO> toMovieListPageVO(Page<Movie> page) {
@@ -390,6 +460,77 @@ public class MovieServiceImpl implements MovieService {
             vo.setIsLiked(Boolean.TRUE.equals(isMember));
         } else {
             vo.setIsLiked(false);
+        }
+
+        return vo;
+    }
+
+    private AdminReviewListVO toAdminReviewListVO(MovieReview review) {
+        AdminReviewListVO vo = new AdminReviewListVO();
+        vo.setId(review.getId());
+        vo.setUserId(review.getUserId());
+        vo.setMovieId(review.getMovieId());
+        vo.setScore(review.getScore());
+        vo.setContent(review.getContent());
+        vo.setLikeCount(review.getLikeCount());
+        vo.setStatus(review.getStatus());
+        vo.setCreateTime(review.getCreateTime());
+
+        // 获取用户信息
+        User user = userMapper.selectById(review.getUserId());
+        if (user != null) {
+            vo.setNickname(user.getNickname());
+            vo.setAvatar(user.getAvatar());
+        } else {
+            vo.setNickname("用户已删除");
+            vo.setAvatar("");
+        }
+
+        // 获取电影信息
+        Movie movie = movieMapper.selectById(review.getMovieId());
+        if (movie != null) {
+            vo.setMovieTitle(movie.getTitle());
+            vo.setMoviePoster(movie.getPoster());
+        } else {
+            vo.setMovieTitle("电影已删除");
+            vo.setMoviePoster("");
+        }
+
+        return vo;
+    }
+
+    private AdminReviewDetailVO toAdminReviewDetailVO(MovieReview review) {
+        AdminReviewDetailVO vo = new AdminReviewDetailVO();
+        vo.setId(review.getId());
+        vo.setUserId(review.getUserId());
+        vo.setMovieId(review.getMovieId());
+        vo.setScore(review.getScore());
+        vo.setContent(review.getContent());
+        vo.setLikeCount(review.getLikeCount());
+        vo.setStatus(review.getStatus());
+        vo.setCreateTime(review.getCreateTime());
+        vo.setUpdateTime(review.getUpdateTime());
+
+        // 获取用户信息
+        User user = userMapper.selectById(review.getUserId());
+        if (user != null) {
+            vo.setNickname(user.getNickname());
+            vo.setAvatar(user.getAvatar());
+            vo.setUserPhone(user.getPhone());
+        } else {
+            vo.setNickname("用户已删除");
+            vo.setAvatar("");
+            vo.setUserPhone("");
+        }
+
+        // 获取电影信息
+        Movie movie = movieMapper.selectById(review.getMovieId());
+        if (movie != null) {
+            vo.setMovieTitle(movie.getTitle());
+            vo.setMoviePoster(movie.getPoster());
+        } else {
+            vo.setMovieTitle("电影已删除");
+            vo.setMoviePoster("");
         }
 
         return vo;

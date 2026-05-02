@@ -1,5 +1,7 @@
 package com.maoyan.service;
 
+import com.maoyan.dto.movie.AdminReviewQueryDTO;
+import com.maoyan.dto.movie.AuditReviewRequest;
 import com.maoyan.dto.movie.MovieQueryDTO;
 import com.maoyan.dto.movie.MovieSaveDTO;
 import com.maoyan.dto.movie.ReviewCreateDTO;
@@ -134,5 +136,38 @@ public interface MovieService {
      * @param id 电影ID
      */
     void deleteMovie(Long id);
+
+    // ============== B端影评管理接口 ==============
+
+    /**
+     * 分页查询影评（管理端）
+     *
+     * @param queryDTO 查询参数
+     * @return 影评列表
+     */
+    PageVO<AdminReviewListVO> listReviewsAdmin(AdminReviewQueryDTO queryDTO);
+
+    /**
+     * 获取影评详情（管理端）
+     *
+     * @param id 影评ID
+     * @return 影评详情
+     */
+    AdminReviewDetailVO getReviewDetailAdmin(Long id);
+
+    /**
+     * 审核影评
+     *
+     * @param id      影评ID
+     * @param request 审核参数
+     */
+    void auditReview(Long id, AuditReviewRequest request);
+
+    /**
+     * 删除影评（管理端）
+     *
+     * @param id 影评ID
+     */
+    void deleteReviewAdmin(Long id);
 
 }
