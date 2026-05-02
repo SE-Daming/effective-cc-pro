@@ -76,9 +76,9 @@
 | 排片模块 | ✅ | 100% | controller/api/ScheduleController | 排片查询、座位锁定 |
 | 订单模块 | ✅ | 100% | controller/api/order | 选座购票、支付、退票 |
 | 优惠券模块 | ✅ | 100% | controller/api/coupon | 领券、使用、查询 |
-| 卖品模块 | ⏳ | 0% | controller/api/snack | 卖品列表、购买 |
-| 收藏模块 | ⏳ | 0% | controller/api/favorite | 收藏/取消收藏 |
-| 首页模块 | ⏳ | 0% | controller/api/home | Banner、热门推荐 |
+| 卖品模块 | ✅ | 100% | controller/api/snack | 卖品列表、购买 |
+| 收藏模块 | ✅ | 100% | controller/api/favorite | 收藏/取消收藏 |
+| 首页模块 | ✅ | 100% | controller/api/home | Banner、热门推荐 |
 | 管理员认证 | ✅ | 100% | controller/admin/AdminAuthController | 登录、获取信息、登出、JWT认证 |
 | 电影管理 | ✅ | 100% | controller/admin/movie | 电影CRUD、分类管理 |
 | 影院管理 | ✅ | 100% | controller/admin/cinema | 影院CRUD、影厅CRUD、座位自动生成 |
