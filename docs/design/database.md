@@ -22,11 +22,13 @@
 | **用户模块** | user | 用户表 |
 | | member_level | 会员等级配置表 |
 | | user_points_log | 用户积分流水表 |
+| | search_history | 搜索历史表 |
 | **电影模块** | movie | 电影表 |
-| | movie_actor | 电影演员关联表 |
+| | movie_actor | 电影演员表 |
 | | movie_category | 电影分类表 |
 | | movie_review | 影评表 |
-| **影院模块** | cinema | 影院表 |
+| **影院模块** | cinema_brand | 影院品牌表 |
+| | cinema | 影院表 |
 | | hall | 影厅表 |
 | | seat | 座位表 |
 | **排片模块** | schedule | 排片表 |
@@ -233,6 +235,20 @@
 | sort | int | YES | 0 | 排序 |
 | create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
 
+#### movie_actor - 电影演员表
+
+| 字段 | 类型 | 空 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| id | bigint | NO | AUTO_INCREMENT | 主键 |
+| movie_id | bigint | NO | - | 电影ID |
+| name | varchar(64) | NO | - | 演员姓名 |
+| role | varchar(32) | YES | NULL | 角色：主演/配角/导演等 |
+| sort | int | YES | 0 | 排序 |
+| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
+
+**索引：**
+- KEY idx_movie_id (movie_id)
+
 #### movie_review - 影评表
 
 | 字段 | 类型 | 空 | 默认值 | 说明 |
@@ -255,6 +271,18 @@
 ---
 
 ### 3.3 影院模块
+
+#### cinema_brand - 影院品牌表
+
+| 字段 | 类型 | 空 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| id | int | NO | AUTO_INCREMENT | 主键 |
+| name | varchar(64) | NO | - | 品牌名称 |
+| logo | varchar(255) | YES | NULL | 品牌Logo |
+| description | varchar(255) | YES | NULL | 品牌介绍 |
+| sort | int | YES | 0 | 排序 |
+| status | tinyint | YES | 1 | 状态 |
+| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
 
 #### cinema - 影院表
 
@@ -334,6 +362,7 @@
 | show_date | date | NO | - | 放映日期 |
 | show_time | time | NO | - | 放映时间 |
 | end_time | time | YES | NULL | 结束时间 |
+| clean_duration | int | YES | 15 | 清洁时间（分钟） |
 | price | decimal(6,2) | NO | - | 票价 |
 | member_price | decimal(6,2) | YES | NULL | 会员价 |
 | total_seats | int | NO | - | 总座位数 |
@@ -365,15 +394,19 @@
 | discount_amount | decimal(10,2) | YES | 0.00 | 优惠金额 |
 | points_amount | decimal(10,2) | YES | 0.00 | 积分抵扣金额 |
 | pay_amount | decimal(10,2) | NO | - | 实付金额 |
-| coupon_id | bigint | YES | NULL | 使用的优惠券ID |
+| user_coupon_id | bigint | YES | NULL | 使用的用户优惠券ID |
 | use_points | int | YES | 0 | 使用积分数 |
 | status | tinyint | NO | 1 | 状态 |
 | pay_time | datetime | YES | NULL | 支付时间 |
 | pay_type | varchar(20) | YES | NULL | 支付方式 |
 | pay_trade_no | varchar(64) | YES | NULL | 第三方交易号 |
 | refund_amount | decimal(10,2) | YES | NULL | 退款金额 |
+| refund_fee | decimal(10,2) | YES | NULL | 退票手续费 |
 | refund_time | datetime | YES | NULL | 退款时间 |
 | refund_reason | varchar(255) | YES | NULL | 退款原因 |
+| refund_auditor_id | int | YES | NULL | 退款审核人ID |
+| refund_audit_time | datetime | YES | NULL | 退款审核时间 |
+| refund_audit_remark | varchar(255) | YES | NULL | 退款审核备注 |
 | expire_time | datetime | YES | NULL | 过期时间 |
 | create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
 | update_time | datetime | YES | CURRENT_TIMESTAMP | 更新时间 |
@@ -468,6 +501,7 @@
 | total_count | int | YES | 0 | 发放总量 |
 | used_count | int | YES | 0 | 已使用数量 |
 | receive_count | int | YES | 0 | 已领取数量 |
+| limit_per_user | int | YES | 1 | 每人限领数量 |
 | valid_days | int | YES | NULL | 有效天数 |
 | valid_start | date | YES | NULL | 有效期开始 |
 | valid_end | date | YES | NULL | 有效期结束 |
@@ -556,6 +590,19 @@
 
 **索引：**
 - UNIQUE KEY uk_user_target (user_id, target_type, target_id)
+
+#### search_history - 搜索历史表
+
+| 字段 | 类型 | 空 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| id | bigint | NO | AUTO_INCREMENT | 主键 |
+| user_id | bigint | NO | - | 用户ID |
+| keyword | varchar(128) | NO | - | 搜索关键词 |
+| type | tinyint | YES | 1 | 类型：1电影 2影院 |
+| create_time | datetime | YES | CURRENT_TIMESTAMP | 创建时间 |
+
+**索引：**
+- KEY idx_user_id (user_id)
 
 ---
 
@@ -719,9 +766,9 @@
 
 | 模块 | 表数量 |
 |------|--------|
-| 用户模块 | 3 |
-| 电影模块 | 3 |
-| 影院模块 | 3 |
+| 用户模块 | 4 |
+| 电影模块 | 4 |
+| 影院模块 | 4 |
 | 排片模块 | 1 |
 | 订单模块 | 4 |
 | 优惠券模块 | 2 |
@@ -730,10 +777,10 @@
 | 消息模块 | 2 |
 | 管理员模块 | 3 |
 | 其他 | 1 |
-| **总计** | **25** |
+| **总计** | **28** |
 
 ---
 
-*文档版本：v1.0*
+*文档版本：v1.1*
 *创建时间：2025-05-02*
 *最后更新：2025-05-02*
