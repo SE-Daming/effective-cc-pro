@@ -36,7 +36,7 @@ public class JwtUtil {
     }
 
     /**
-     * 生成 Token
+     * 生成 Token（管理员）
      *
      * @param adminId   管理员ID
      * @param username  用户名
@@ -46,7 +46,21 @@ public class JwtUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put("adminId", adminId);
         claims.put("username", username);
+        claims.put("type", "admin");
         return createToken(claims, username);
+    }
+
+    /**
+     * 生成 Token（用户）
+     *
+     * @param userId 用户ID
+     * @return Token
+     */
+    public String generateUserToken(Long userId) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
+        claims.put("type", "user");
+        return createToken(claims, "user_" + userId);
     }
 
     /**
@@ -102,6 +116,20 @@ public class JwtUtil {
         Claims claims = parseToken(token);
         if (claims != null) {
             return claims.getSubject();
+        }
+        return null;
+    }
+
+    /**
+     * 从 Token 中获取用户ID
+     */
+    public Long getUserId(String token) {
+        Claims claims = parseToken(token);
+        if (claims != null) {
+            Object userId = claims.get("userId");
+            if (userId != null) {
+                return ((Number) userId).longValue();
+            }
         }
         return null;
     }

@@ -23,15 +23,15 @@
 
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 用户模块 | ⏳ | 0% | - | 微信登录、个人信息、搜索历史 |
+| 用户模块 | ✅ | 100% | controller/api/user | 微信登录、个人信息、搜索历史 |
 | 电影模块 | ⏳ | 0% | - | 电影列表、详情、影评 |
 | 影院模块 | ⏳ | 0% | - | 影院列表、详情、影厅 |
 | 排片模块 | ⏳ | 0% | - | 排片查询、座位选择 |
 | 订单模块 | ⏳ | 0% | - | 选座购票、支付、退票 |
-| 优惠券模块 | ⏳ | 0% | - | 领券、使用、查询 |
-| 卖品模块 | ⏳ | 0% | - | 卖品列表、购买 |
-| 收藏模块 | ⏳ | 0% | - | 收藏电影/影院 |
-| 首页推荐 | ⏳ | 0% | - | Banner、热门推荐 |
+| 优惠券模块 | ✅ | 100% | controller/api/coupon | 领券、使用、查询 |
+| 卖品模块 | ✅ | 100% | controller/api/snack | 卖品列表、购买 |
+| 收藏模块 | ✅ | 100% | controller/api/favorite | 收藏/取消收藏 |
+| 首页模块 | ✅ | 100% | controller/api/home | Banner、热门推荐 |
 | 搜索模块 | ⏳ | 0% | - | 电影/影院搜索 |
 
 ### B端管理后台
@@ -70,12 +70,12 @@
 
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 用户模块 | ⏳ | 0% | controller/api/user | 微信登录、个人信息、搜索历史 |
+| 用户模块 | ✅ | 100% | controller/api/user | 微信登录、个人信息、搜索历史 |
 | 电影模块 | ✅ | 100% | controller/api/movie | 电影列表、详情、影评 |
 | 影院模块 | ✅ | 100% | controller/api/cinema | 影院列表、详情、影厅、排片查询 |
 | 排片模块 | ✅ | 100% | controller/api/ScheduleController | 排片查询、座位锁定 |
-| 订单模块 | ⏳ | 0% | controller/api/order | 选座购票、支付、退票 |
-| 优惠券模块 | ⏳ | 0% | controller/api/coupon | 领券、使用、查询 |
+| 订单模块 | ✅ | 100% | controller/api/order | 选座购票、支付、退票 |
+| 优惠券模块 | ✅ | 100% | controller/api/coupon | 领券、使用、查询 |
 | 卖品模块 | ⏳ | 0% | controller/api/snack | 卖品列表、购买 |
 | 收藏模块 | ⏳ | 0% | controller/api/favorite | 收藏/取消收藏 |
 | 首页模块 | ⏳ | 0% | controller/api/home | Banner、热门推荐 |
@@ -83,12 +83,12 @@
 | 电影管理 | ✅ | 100% | controller/admin/movie | 电影CRUD、分类管理 |
 | 影院管理 | ✅ | 100% | controller/admin/cinema | 影院CRUD、影厅CRUD、座位自动生成 |
 | 排片管理 | ✅ | 100% | controller/admin/AdminScheduleController | 排片CRUD、冲突检测、批量排片 |
-| 订单管理 | ⏳ | 0% | controller/admin/order | 订单查看、退款审核 |
-| 用户管理 | ⏳ | 0% | controller/admin/user | 用户查看、禁用 |
-| 优惠券管理 | ⏳ | 0% | controller/admin/coupon | 优惠券CRUD、发放 |
-| 卖品管理 | ⏳ | 0% | controller/admin/snack | 卖品CRUD、库存管理 |
+| 订单管理 | ✅ | 100% | controller/admin/order | 订单查看、退款审核 |
+| 用户管理 | ✅ | 100% | controller/admin/user | 用户查看、禁用 |
+| 优惠券管理 | ✅ | 100% | controller/admin/coupon | 优惠券CRUD、发放 |
+| 卖品管理 | ✅ | 100% | controller/admin/snack | 卖品CRUD、库存管理 |
 | 影评管理 | ⏳ | 0% | controller/admin/review | 影评审核、删除 |
-| 数据统计 | ⏳ | 0% | controller/admin/statistics | 销售统计、排行 |
+| 数据统计 | ✅ | 100% | controller/admin/statistics | 销售统计、排行 |
 
 ### 前端
 
@@ -110,10 +110,15 @@
   - ✅ 管理后台框架搭建（Vue 3 + Vite + Element Plus + Pinia）
   - ✅ 电影模块后端接口（C端：正在热映、即将上映、搜索、详情、影评；B端：电影CRUD、分类管理）
   - ✅ 排片模块后端接口（C端：排片影院列表、排片详情、座位图、锁定座位、释放锁；B端：排片列表、新增、批量排片、删除、冲突检测）
+  - ✅ 订单模块后端接口（C端：创建订单、组合订单、支付信息、取消订单、订单列表、订单详情、取票码、退票检查、申请退票、卖品取货码；B端：订单列表、订单详情、退款审核）
+  - ✅ 优惠券模块后端接口（C端：领券、我的优惠券、可用优惠券；B端：优惠券CRUD、发放）
+  - ✅ 卖品模块后端接口（C端：卖品分类、卖品列表、卖品详情、创建卖品订单、卖品订单详情、卖品订单列表；B端：卖品CRUD）
+  - ✅ 收藏模块后端接口（C端：添加收藏、取消收藏、检查收藏、收藏电影列表、收藏影院列表、收藏统计）
+  - ✅ 首页模块后端接口（C端：Banner列表、热门电影推荐）
+  - ✅ 数据统计模块后端接口（B端：销售统计概览、销售趋势、电影票房排行、影院销售排行）
 - **下一步**：
-  1. 完善后端主服务业务模块开发（订单、优惠券等）
-  2. 创建 AI 助手服务 Spring Boot 项目
-  3. 创建小程序 UniApp 项目
+  1. 创建 AI 助手服务 Spring Boot 项目
+  2. 创建小程序 UniApp 项目
 
 ---
 

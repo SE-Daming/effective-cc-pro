@@ -1,6 +1,7 @@
 package com.maoyan.config;
 
 import com.maoyan.interceptor.AdminAuthInterceptor;
+import com.maoyan.interceptor.UserAuthInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,14 +20,28 @@ import java.util.List;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final AdminAuthInterceptor adminAuthInterceptor;
+    private final UserAuthInterceptor userAuthInterceptor;
 
     /**
      * 管理端接口不需要认证的路径
      */
-    private static final List<String> EXCLUDE_PATHS = Arrays.asList(
+    private static final List<String> ADMIN_EXCLUDE_PATHS = Arrays.asList(
             "/admin/auth/login",
             "/admin/auth/captcha",
             "/admin/health",
+            "/doc.html",
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/webjars/**"
+    );
+
+    /**
+     * 用户端接口不需要认证的路径
+     */
+    private static final List<String> USER_EXCLUDE_PATHS = Arrays.asList(
+            "/auth/wx-login",
+            "/health",
             "/doc.html",
             "/swagger-ui.html",
             "/swagger-ui/**",
@@ -39,9 +54,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // 管理端认证拦截器
         registry.addInterceptor(adminAuthInterceptor)
                 .addPathPatterns("/admin/**")
-                .excludePathPatterns(EXCLUDE_PATHS);
+                .excludePathPatterns(ADMIN_EXCLUDE_PATHS);
+
+        // 用户端认证拦截器
+        registry.addInterceptor(userAuthInterceptor)
+                .addPathPatterns("/users/**")
+                .excludePathPatterns(USER_EXCLUDE_PATHS);
     }
 
     /**
