@@ -38,16 +38,16 @@
 
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 管理员模块 | ⏳ | 0% | - | 登录、角色权限、操作日志 |
-| 电影管理 | ⏳ | 0% | - | 电影CRUD、分类管理 |
-| 影院管理 | ⏳ | 0% | - | 影院、影厅、座位管理 |
-| 排片管理 | ⏳ | 0% | - | 排片CRUD、冲突检测 |
-| 订单管理 | ⏳ | 0% | - | 订单查看、退款审核 |
-| 用户管理 | ⏳ | 0% | - | 用户查看、禁用 |
-| 优惠券管理 | ⏳ | 0% | - | 优惠券CRUD、发放 |
-| 卖品管理 | ⏳ | 0% | - | 卖品CRUD、库存管理 |
-| 影评管理 | ⏳ | 0% | - | 影评审核、删除 |
-| 数据统计 | ⏳ | 0% | - | 销售统计、排行 |
+| 管理员模块 | ✅ | 100% | views/login, stores/user | 登录页、用户状态管理 |
+| 电影管理 | ✅ | 100% | views/movie | 列表页、编辑页 |
+| 影院管理 | ✅ | 100% | views/cinema | 列表页、编辑页、影厅管理 |
+| 排片管理 | ✅ | 100% | views/schedule | 列表页、排片日历 |
+| 订单管理 | ✅ | 100% | views/order | 列表页、详情页 |
+| 用户管理 | ✅ | 100% | views/user | 列表页、详情页 |
+| 优惠券管理 | ✅ | 100% | views/coupon | 列表页、编辑页 |
+| 卖品管理 | ✅ | 100% | views/snack | 列表页 |
+| 影评管理 | ⏳ | 0% | - | 待开发 |
+| 数据统计 | ✅ | 100% | views/statistics | 概览、电影排行、影院排行 |
 
 ### AI助手模块
 
@@ -59,10 +59,36 @@
 
 ### 后端服务
 
+#### 基础框架
+
 | 模块 | 状态 | 进度 | 关键文件 | 备注 |
 |------|------|------|----------|------|
-| 主服务框架搭建 | 🔵 | 100% | backend/main-service | Spring Boot 3.2.5 + MyBatis-Plus 3.5.5，已完成基础框架 |
+| 主服务框架搭建 | ✅ | 100% | backend/main-service | Spring Boot 3.2.5 + MyBatis-Plus 3.5.5 |
 | AI助手服务搭建 | ⏳ | 0% | backend/ai-assistant | Spring Boot + Spring AI |
+
+#### 主服务业务模块
+
+| 模块 | 状态 | 进度 | 关键文件 | 备注 |
+|------|------|------|----------|------|
+| 用户模块 | ⏳ | 0% | controller/api/user | 微信登录、个人信息、搜索历史 |
+| 电影模块 | ⏳ | 0% | controller/api/movie | 电影列表、详情、影评 |
+| 影院模块 | ⏳ | 0% | controller/api/cinema | 影院列表、详情、影厅 |
+| 排片模块 | ⏳ | 0% | controller/api/schedule | 排片查询、座位锁定 |
+| 订单模块 | ⏳ | 0% | controller/api/order | 选座购票、支付、退票 |
+| 优惠券模块 | ⏳ | 0% | controller/api/coupon | 领券、使用、查询 |
+| 卖品模块 | ⏳ | 0% | controller/api/snack | 卖品列表、购买 |
+| 收藏模块 | ⏳ | 0% | controller/api/favorite | 收藏/取消收藏 |
+| 首页模块 | ⏳ | 0% | controller/api/home | Banner、热门推荐 |
+| 管理员认证 | ⏳ | 0% | controller/admin/auth | 登录、权限校验 |
+| 电影管理 | ⏳ | 0% | controller/admin/movie | 电影CRUD、分类管理 |
+| 影院管理 | ⏳ | 0% | controller/admin/cinema | 影院、影厅、座位管理 |
+| 排片管理 | ⏳ | 0% | controller/admin/schedule | 排片CRUD、冲突检测 |
+| 订单管理 | ⏳ | 0% | controller/admin/order | 订单查看、退款审核 |
+| 用户管理 | ⏳ | 0% | controller/admin/user | 用户查看、禁用 |
+| 优惠券管理 | ⏳ | 0% | controller/admin/coupon | 优惠券CRUD、发放 |
+| 卖品管理 | ⏳ | 0% | controller/admin/snack | 卖品CRUD、库存管理 |
+| 影评管理 | ⏳ | 0% | controller/admin/review | 影评审核、删除 |
+| 数据统计 | ⏳ | 0% | controller/admin/statistics | 销售统计、排行 |
 
 ### 前端
 
