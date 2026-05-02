@@ -306,6 +306,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public MovieDetailVO getMovieDetailAdmin(Long id) {
+        return getMovieDetail(id, null);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createMovie(MovieSaveDTO saveDTO) {
         Movie movie = new Movie();

@@ -5,6 +5,7 @@ import com.maoyan.dto.movie.MovieQueryDTO;
 import com.maoyan.dto.movie.MovieSaveDTO;
 import com.maoyan.service.MovieService;
 import com.maoyan.vo.PageVO;
+import com.maoyan.vo.movie.MovieDetailVO;
 import com.maoyan.vo.movie.MovieListVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -30,6 +31,13 @@ public class AdminMovieController {
     @GetMapping
     public Result<PageVO<MovieListVO>> listMovies(@Valid MovieQueryDTO queryDTO) {
         return Result.success(movieService.listMoviesAdmin(queryDTO));
+    }
+
+    @Operation(summary = "获取电影详情")
+    @GetMapping("/{id}")
+    public Result<MovieDetailVO> getMovieDetail(
+            @Parameter(description = "电影ID") @PathVariable Long id) {
+        return Result.success(movieService.getMovieDetailAdmin(id));
     }
 
     @Operation(summary = "新增电影")

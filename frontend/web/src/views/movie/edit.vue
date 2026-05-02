@@ -66,16 +66,12 @@
 
         <el-form-item label="分类" prop="categoryIds">
           <el-select v-model="form.categoryIds" multiple placeholder="请选择分类">
-            <el-option label="动作" value="1" />
-            <el-option label="喜剧" value="2" />
-            <el-option label="爱情" value="3" />
-            <el-option label="科幻" value="4" />
-            <el-option label="动画" value="5" />
-            <el-option label="悬疑" value="6" />
-            <el-option label="惊悚" value="7" />
-            <el-option label="恐怖" value="8" />
-            <el-option label="犯罪" value="9" />
-            <el-option label="剧情" value="10" />
+            <el-option
+              v-for="cat in categories"
+              :key="cat.id"
+              :label="cat.name"
+              :value="String(cat.id)"
+            />
           </el-select>
         </el-form-item>
 
@@ -83,7 +79,7 @@
           <el-radio-group v-model="form.status">
             <el-radio :value="1">即将上映</el-radio>
             <el-radio :value="2">正在热映</el-radio>
-            <el-radio :value="0">已下架</el-radio>
+            <el-radio :value="3">已下架</el-radio>
           </el-radio-group>
         </el-form-item>
 
@@ -115,7 +111,7 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { getMovieDetail, createMovie, updateMovie } from '@/api/movie'
+import { getMovieDetail, createMovie, updateMovie, getMovieCategories } from '@/api/movie'
 
 const route = useRoute()
 const router = useRouter()
@@ -128,6 +124,9 @@ const formRef = ref(null)
 
 // 加载状态
 const loading = ref(false)
+
+// 分类列表
+const categories = ref([])
 
 // 表单数据
 const form = reactive({
@@ -155,14 +154,30 @@ const rules = {
   status: [{ required: true, message: '请选择状态', trigger: 'change' }]
 }
 
+// 获取分类列表
+const fetchCategories = async () => {
+  try {
+    const res = await getMovieCategories()
+    categories.value = res.data || []
+  } catch (error) {
+    console.error('获取分类失败:', error)
+  }
+}
+
 // 获取详情
 const fetchDetail = async () => {
   if (!route.params.id) return
   try {
     const res = await getMovieDetail(route.params.id)
-    Object.assign(form, res.data)
+    const data = res.data
+    // 处理 categoryIds，将逗号分隔的字符串转为数组
+    if (data.categoryIds) {
+      data.categoryIds = data.categoryIds.split(',').map(id => id.trim())
+    }
+    Object.assign(form, data)
   } catch (error) {
     console.error('获取详情失败:', error)
+    ElMessage.error('获取电影详情失败')
   }
 }
 
@@ -193,6 +208,7 @@ const handleSubmit = async () => {
 }
 
 onMounted(() => {
+  fetchCategories()
   if (isEdit.value) {
     fetchDetail()
   }

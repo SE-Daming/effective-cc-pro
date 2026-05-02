@@ -46,7 +46,7 @@ export function deleteMovie(id) {
 // 获取电影分类
 export function getMovieCategories() {
   return request({
-    url: '/admin/categories',
+    url: '/admin/movie-categories',
     method: 'get'
   })
 }

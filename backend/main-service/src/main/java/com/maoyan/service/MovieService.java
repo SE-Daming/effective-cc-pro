@@ -115,6 +115,14 @@ public interface MovieService {
     PageVO<MovieListVO> listMoviesAdmin(MovieQueryDTO queryDTO);
 
     /**
+     * 获取电影详情（管理端）
+     *
+     * @param id 电影ID
+     * @return 电影详情
+     */
+    MovieDetailVO getMovieDetailAdmin(Long id);
+
+    /**
      * 新增电影
      *
      * @param saveDTO 电影参数
