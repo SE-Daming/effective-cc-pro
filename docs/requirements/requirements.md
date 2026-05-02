@@ -13,6 +13,8 @@
 - **B 端管理后台**：影院运营、数据管理
 - **AI 助手模块**：智能客服、智能推荐、Function Call 购票
 
+> 📖 AI 助手模块详见 [ai-assistant.md](./ai-assistant.md)
+
 ### 1.2 目标用户
 
 | 用户类型 | 说明 |
@@ -23,6 +25,13 @@
 ### 1.3 毕设侧重点
 
 **功能完整性** — 侧重业务逻辑完整性，功能全面
+
+### 1.4 相关文档
+
+| 文档 | 说明 |
+|------|------|
+| [business-rules.md](./business-rules.md) | 业务规则说明（选座、退票、积分、会员等） |
+| [ai-assistant.md](./ai-assistant.md) | AI 助手模块需求（智能客服、推荐、Function Call） |
 
 ---
 
