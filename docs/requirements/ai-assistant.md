@@ -212,114 +212,9 @@
 
 ---
 
-## 5. Function Call 接口清单
+## 5. 对话交互设计
 
-### 5.1 需要调用的主服务接口
-
-| 接口 | 用途 | 对应 Function |
-|------|------|---------------|
-| `/api/movies` | 查询电影列表 | 电影推荐、智能购票 |
-| `/api/cinemas` | 查询影院列表 | 影院推荐 |
-| `/api/schedules` | 查询排片信息 | 智能购票 |
-| `/api/orders` | 查询/创建订单 | 智能购票、查询订单、智能退票 |
-| `/api/orders/{id}/refund` | 申请退票 | 智能退票 |
-| `/api/coupons` | 查询优惠券 | 优惠券推荐 |
-| `/api/users/{id}/history` | 查询用户历史 | 个性化推荐 |
-
-### 5.2 Function 定义
-
-```json
-{
-  "functions": [
-    {
-      "name": "search_movies",
-      "description": "搜索电影，支持按类型、名称、演员筛选",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "genre": { "type": "string", "description": "电影类型" },
-          "keyword": { "type": "string", "description": "关键词" },
-          "actor": { "type": "string", "description": "演员名" }
-        }
-      }
-    },
-    {
-      "name": "search_cinemas",
-      "description": "搜索影院，支持按位置、设施筛选",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "location": { "type": "string", "description": "位置" },
-          "facility": { "type": "string", "description": "设施：IMAX, Dolby等" }
-        }
-      }
-    },
-    {
-      "name": "get_schedules",
-      "description": "查询排片信息",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "movieId": { "type": "long", "description": "电影ID" },
-          "cinemaId": { "type": "long", "description": "影院ID" },
-          "date": { "type": "string", "description": "日期" }
-        },
-        "required": ["movieId", "cinemaId"]
-      }
-    },
-    {
-      "name": "create_order",
-      "description": "创建订单",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "scheduleId": { "type": "long", "description": "场次ID" },
-          "seats": { "type": "array", "items": { "type": "string" }, "description": "座位号" }
-        },
-        "required": ["scheduleId", "seats"]
-      }
-    },
-    {
-      "name": "query_orders",
-      "description": "查询用户订单",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "status": { "type": "string", "description": "订单状态" },
-          "cinemaName": { "type": "string", "description": "影院名称" }
-        }
-      }
-    },
-    {
-      "name": "refund_order",
-      "description": "申请退票",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "orderId": { "type": "long", "description": "订单ID" }
-        },
-        "required": ["orderId"]
-      }
-    },
-    {
-      "name": "get_user_coupons",
-      "description": "获取用户优惠券",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "status": { "type": "string", "description": "状态：可用、已用、过期" }
-        }
-      }
-    }
-  ]
-}
-```
-
----
-
-## 6. 对话交互设计
-
-### 6.1 多轮对话示例
+### 5.1 多轮对话示例
 
 **场景：智能购票**
 
@@ -361,7 +256,7 @@ AI：支付成功！取票码：886655，请凭此码到影院取票。
     电影开场前 30 分钟会提醒您，祝您观影愉快！
 ```
 
-### 6.2 智能退票流程（含手续费告知）
+### 5.2 智能退票流程（含手续费告知）
 
 ```
 用户：帮我退掉明天的票
@@ -373,7 +268,7 @@ AI：找到您的订单：《流浪地球3》明晚 19:30，票价 45 元
 AI：退票成功！退款 40.5 元将在 1-3 个工作日原路返回。
 ```
 
-### 6.3 错误处理
+### 5.3 错误处理
 
 | 场景 | AI 回复 |
 |------|---------|
@@ -386,255 +281,7 @@ AI：退票成功！退款 40.5 元将在 1-3 个工作日原路返回。
 
 ---
 
-## 7. 技术实现方案
-
-### 7.1 意图识别机制
-
-| 方案 | 说明 | 适用场景 |
-|------|------|----------|
-| **大模型识别（主）** | 通过 Prompt 引导大模型识别用户意图 | 复杂意图、模糊表达 |
-| 关键词匹配（辅） | 预定义关键词规则快速匹配 | 明确指令（如"退票"、"查订单"） |
-
-**Prompt 设计示例：**
-
-```
-你是一个电影票务助手。根据用户输入，识别用户意图并提取参数。
-
-支持的意图：
-- BOOK_TICKET: 购票（参数：电影名、影院、时间、数量）
-- REFUND_TICKET: 退票（参数：订单号、时间）
-- QUERY_ORDER: 查询订单（参数：状态、影院）
-- SEARCH_MOVIE: 搜索电影（参数：类型、关键词）
-- SEARCH_CINEMA: 搜索影院（参数：位置、设施）
-- ASK_RULE: 咨询规则（参数：规则类型）
-
-用户输入：{user_input}
-
-请返回 JSON 格式：
-{
-  "intent": "意图名称",
-  "parameters": { ... },
-  "confidence": 0.95
-}
-```
-
-### 7.2 上下文管理
-
-| 方案 | 说明 |
-|------|------|
-| 存储方式 | Redis 存储 Session 上下文 |
-| Session Key | `ai:session:{userId}:{sessionId}` |
-| 过期时间 | 30 分钟无交互自动过期 |
-| 存储内容 | 对话历史、当前意图、已提取参数 |
-
-**Session 数据结构：**
-
-```json
-{
-  "userId": 10001,
-  "sessionId": "sess_xxx",
-  "createdAt": "2025-05-02T10:00:00",
-  "lastActiveAt": "2025-05-02T10:15:00",
-  "currentIntent": "BOOK_TICKET",
-  "extractedParams": {
-    "movieName": "流浪地球3",
-    "cinemaId": 5
-  },
-  "conversationHistory": [
-    {"role": "user", "content": "帮我买一张科幻片"},
-    {"role": "assistant", "content": "好的，为您推荐..."}
-  ]
-}
-```
-
-### 7.3 用户身份识别
-
-| 场景 | 方式 |
-|------|------|
-| 小程序端 | 前端调用时在 Header 传递 `X-User-Id`（微信授权后获取） |
-| Web 端 | 前端调用时在 Header 传递 `X-User-Id` + `X-Token` |
-| AI 调用主服务 | AI 服务携带 `X-User-Id` 调用，主服务校验权限 |
-
-**请求示例：**
-
-```
-POST /api/ai/chat
-Headers:
-  X-User-Id: 10001
-  X-Token: xxx
-Body:
-  {
-    "message": "帮我买一张科幻片",
-    "sessionId": "sess_xxx"
-  }
-```
-
----
-
-## 8. 完整接口清单
-
-### 8.1 AI 服务调用主服务接口
-
-| 接口 | 方法 | 用途 | 对应 Function |
-|------|------|------|---------------|
-| `/api/movies` | GET | 查询电影列表（支持分页） | search_movies |
-| `/api/cinemas` | GET | 查询影院列表（支持分页） | search_cinemas |
-| `/api/schedules` | GET | 查询排片信息 | get_schedules |
-| `/api/schedules/{id}/seats` | GET | 获取座位图 | get_seats |
-| `/api/seats/lock` | POST | 锁定座位 | lock_seats |
-| `/api/seats/release` | POST | 释放座位 | release_seats |
-| `/api/orders` | POST | 创建订单 | create_order |
-| `/api/orders/{id}/pay` | POST | 发起支付 | pay_order |
-| `/api/orders` | GET | 查询订单列表 | query_orders |
-| `/api/orders/{id}/refund` | POST | 申请退票 | refund_order |
-| `/api/coupons` | GET | 获取用户优惠券 | get_user_coupons |
-| `/api/users/{id}/history` | GET | 获取用户观影历史 | get_user_history |
-| `/api/users/{id}/profile` | GET | 获取用户画像 | get_user_profile |
-
-### 8.2 接口参数说明
-
-**电影列表接口：**
-
-```
-GET /api/movies?page=1&size=10&genre=科幻&keyword=流浪
-
-Response:
-{
-  "code": 200,
-  "data": {
-    "total": 100,
-    "page": 1,
-    "size": 10,
-    "list": [...]
-  }
-}
-```
-
-**座位图接口：**
-
-```
-GET /api/schedules/{scheduleId}/seats
-
-Response:
-{
-  "code": 200,
-  "data": {
-    "rows": 10,
-    "cols": 12,
-    "seats": [
-      {"row": 1, "col": 1, "status": "SOLD"},
-      {"row": 1, "col": 2, "status": "AVAILABLE"},
-      ...
-    ]
-  }
-}
-```
-
-**锁座接口：**
-
-```
-POST /api/seats/lock
-{
-  "scheduleId": 123,
-  "seatIds": ["1-5", "1-6"]
-}
-
-Response:
-{
-  "code": 200,
-  "data": {
-    "lockId": "lock_xxx",
-    "expireTime": "2025-05-02T10:05:00"
-  }
-}
-```
-
-### 8.3 Function 定义（补充版）
-
-```json
-{
-  "functions": [
-    {
-      "name": "search_movies",
-      "description": "搜索电影，支持按类型、名称、演员筛选",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "genre": { "type": "string", "description": "电影类型" },
-          "keyword": { "type": "string", "description": "关键词" },
-          "actor": { "type": "string", "description": "演员名" },
-          "page": { "type": "integer", "description": "页码，默认1" },
-          "size": { "type": "integer", "description": "每页数量，默认10" }
-        }
-      }
-    },
-    {
-      "name": "get_seats",
-      "description": "获取场次座位图",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "scheduleId": { "type": "long", "description": "场次ID" }
-        },
-        "required": ["scheduleId"]
-      }
-    },
-    {
-      "name": "lock_seats",
-      "description": "锁定座位，5分钟内有效",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "scheduleId": { "type": "long", "description": "场次ID" },
-          "seatIds": { "type": "array", "items": { "type": "string" }, "description": "座位号列表" }
-        },
-        "required": ["scheduleId", "seatIds"]
-      }
-    },
-    {
-      "name": "create_order",
-      "description": "创建订单（需先锁座）",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "scheduleId": { "type": "long", "description": "场次ID" },
-          "seatIds": { "type": "array", "items": { "type": "string" }, "description": "座位号列表" },
-          "lockId": { "type": "string", "description": "锁座ID" },
-          "couponId": { "type": "long", "description": "优惠券ID（可选）" }
-        },
-        "required": ["scheduleId", "seatIds", "lockId"]
-      }
-    },
-    {
-      "name": "pay_order",
-      "description": "发起支付，返回支付链接",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "orderId": { "type": "long", "description": "订单ID" }
-        },
-        "required": ["orderId"]
-      }
-    },
-    {
-      "name": "refund_order",
-      "description": "申请退票，需校验退票规则",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "orderId": { "type": "long", "description": "订单ID" },
-          "reason": { "type": "string", "description": "退票原因（可选）" }
-        },
-        "required": ["orderId"]
-      }
-    }
-  ]
-}
-```
-
----
-
-## 9. 智能购票完整流程
+## 6. 智能购票完整流程
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -682,9 +329,36 @@ Response:
 
 ---
 
-## 10. 推荐能力 - 冷启动策略
+## 7. 技术实现方案
 
-### 10.1 新用户推荐策略
+### 7.1 意图识别机制
+
+| 方案 | 说明 | 适用场景 |
+|------|------|----------|
+| **大模型识别（主）** | 通过 Prompt 引导大模型识别用户意图 | 复杂意图、模糊表达 |
+| 关键词匹配（辅） | 预定义关键词规则快速匹配 | 明确指令（如"退票"、"查订单"） |
+
+### 7.2 上下文管理
+
+| 方案 | 说明 |
+|------|------|
+| 存储方式 | Redis 存储 Session 上下文 |
+| 过期时间 | 30 分钟无交互自动过期 |
+| 存储内容 | 对话历史、当前意图、已提取参数 |
+
+### 7.3 用户身份识别
+
+| 场景 | 方式 |
+|------|------|
+| 小程序端 | 前端调用时在 Header 传递用户标识（微信授权后获取） |
+| Web 端 | 前端调用时在 Header 传递用户标识 + Token |
+| AI 调用主服务 | AI 服务携带用户标识调用，主服务校验权限 |
+
+---
+
+## 8. 推荐能力 - 冷启动策略
+
+### 8.1 新用户推荐策略
 
 | 场景 | 策略 | 说明 |
 |------|------|------|
@@ -692,14 +366,14 @@ Response:
 | 无评分记录 | 平均评分 | 推荐评分 8.0 以上电影 |
 | 无位置信息 | 默认城市 | 根据用户注册 IP 定位城市 |
 
-### 10.2 位置信息获取
+### 8.2 位置信息获取
 
 | 端 | 获取方式 |
 |------|------|
-| 小程序 | `wx.getLocation()` 获取经纬度，传给 AI 接口 |
-| Web 端 | 浏览器 Geolocation API 或用户手动选择城市 |
+| 小程序 | 微信定位 API 获取经纬度，传给 AI 接口 |
+| Web 端 | 浏览器定位 API 或用户手动选择城市 |
 
-### 10.3 用户画像构建
+### 8.3 用户画像构建
 
 | 数据来源 | 字段 | 用途 |
 |----------|------|------|
@@ -710,27 +384,17 @@ Response:
 
 ---
 
-## 11. 安全机制
+## 9. 安全机制
 
-### 11.1 越权校验
+### 9.1 越权校验
 
 | 场景 | 校验方式 |
 |------|----------|
-| 查询订单 | AI 调用时携带 `X-User-Id`，主服务校验订单归属 |
-| 退票操作 | 校验订单 `userId` 与当前用户一致 |
+| 查询订单 | AI 调用时携带用户标识，主服务校验订单归属 |
+| 退票操作 | 校验订单归属用户与当前用户一致 |
 | 优惠券使用 | 校验优惠券归属用户 |
 
-**主服务校验逻辑：**
-
-```java
-// 订单操作前校验
-Order order = orderService.getById(orderId);
-if (!order.getUserId().equals(currentUserId)) {
-    throw new BusinessException("无权操作此订单");
-}
-```
-
-### 11.2 敏感操作确认
+### 9.2 敏感操作确认
 
 | 操作 | 确认方式 |
 |------|----------|
@@ -738,34 +402,20 @@ if (!order.getUserId().equals(currentUserId)) {
 | 退票退款 | AI 明确告知手续费，用户文字确认 |
 | 使用优惠券 | AI 展示优惠金额，用户确认 |
 
-### 11.3 Prompt 注入防护
+### 9.3 Prompt 注入防护
 
 | 防护措施 | 说明 |
 |----------|------|
 | 输入过滤 | 过滤特殊字符、SQL 关键词 |
 | Prompt 隔离 | 用户输入不直接拼接到 Prompt，使用模板变量 |
-| 输出校验 | 校验 AI 返回的 Function Call 参数合法性 |
+| 输出校验 | 校验 AI 返回的参数合法性 |
 | 权限限制 | Function Call 仅能操作当前用户数据 |
-
-**Prompt 模板示例：**
-
-```
-你是一个电影票务助手。
-
-【重要规则】
-1. 你只能查询和操作当前用户（userId: {userId}）的数据
-2. 对于退款等敏感操作，必须先告知用户规则并确认
-3. 不要执行任何与票务无关的操作
-
-用户输入：
-{user_input}
-```
 
 ---
 
-## 12. 性能优化
+## 10. 性能优化
 
-### 12.1 Token 控制
+### 10.1 Token 控制
 
 | 策略 | 说明 |
 |------|------|
@@ -773,7 +423,7 @@ if (!order.getUserId().equals(currentUserId)) {
 | 摘要压缩 | 长对话压缩为摘要后存储 |
 | 意图缓存 | 相同意图复用历史参数提取结果 |
 
-### 12.2 响应优化
+### 10.2 响应优化
 
 | 策略 | 说明 |
 |------|------|
@@ -781,7 +431,7 @@ if (!order.getUserId().equals(currentUserId)) {
 | 并行调用 | 多个独立 Function Call 并行执行 |
 | 接口缓存 | 电影列表、影院列表等数据缓存 |
 
-### 12.3 限流策略
+### 10.3 限流策略
 
 | 限流维度 | 规则 |
 |----------|------|
@@ -790,9 +440,9 @@ if (!order.getUserId().equals(currentUserId)) {
 
 ---
 
-## 13. 异常处理
+## 11. 异常处理
 
-### 13.1 对话异常
+### 11.1 对话异常
 
 | 场景 | 处理方式 |
 |------|----------|
@@ -800,7 +450,7 @@ if (!order.getUserId().equals(currentUserId)) {
 | 中断恢复 | 用户返回时检查 Session，未过期则恢复上下文 |
 | 并发请求 | 同一 Session 仅处理一个请求，返回"请等待上一次请求完成" |
 
-### 13.2 业务异常
+### 11.2 业务异常
 
 | 场景 | AI 回复 |
 |------|---------|
@@ -810,7 +460,7 @@ if (!order.getUserId().equals(currentUserId)) {
 
 ---
 
-## 14. 优先级
+## 12. 优先级
 
 | 功能 | 优先级 | 说明 |
 |------|--------|------|
@@ -825,6 +475,6 @@ if (!order.getUserId().equals(currentUserId)) {
 
 ---
 
-*文档版本：v1.1*
+*文档版本：v1.2*
 *创建时间：2025-05-02*
 *最后更新：2025-05-02*
