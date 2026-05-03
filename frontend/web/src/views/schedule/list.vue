@@ -143,7 +143,8 @@ const fetchData = async () => {
   loading.value = true
   try {
     const res = await getScheduleList({ ...searchForm, page: pagination.page, pageSize: pagination.pageSize })
-    tableData.value = res.data.list
+    // 兼容 MyBatis-Plus 分页格式 (records) 和自定义格式 (list)
+    tableData.value = res.data.records || res.data.list || []
     pagination.total = res.data.total
   } catch (error) {
     console.error('获取数据失败:', error)
