@@ -427,7 +427,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         LambdaQueryWrapper<Schedule> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(cinemaId != null, Schedule::getCinemaId, cinemaId)
                 .eq(movieId != null, Schedule::getMovieId, movieId)
-                .eq(StrUtil.isNotBlank(showDate), Schedule::getShowDate, showDate != null ? LocalDate.parse(showDate) : null)
+                .eq(StrUtil.isNotBlank(showDate), Schedule::getShowDate, StrUtil.isNotBlank(showDate) ? LocalDate.parse(showDate) : null)
                 .orderByDesc(Schedule::getShowDate)
                 .orderByAsc(Schedule::getShowTime);
 
