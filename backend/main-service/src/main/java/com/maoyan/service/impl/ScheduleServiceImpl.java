@@ -661,6 +661,39 @@ public class ScheduleServiceImpl implements ScheduleService {
         return vo;
     }
 
+    @Override
+    public Map<String, List<ScheduleListItemVO>> getScheduleCalendar(String startDate, String endDate) {
+        LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ISO_LOCAL_DATE);
+
+        // 查询日期范围内的排片
+        LambdaQueryWrapper<Schedule> wrapper = new LambdaQueryWrapper<>();
+        wrapper.ge(Schedule::getShowDate, start)
+                .le(Schedule::getShowDate, end)
+                .eq(Schedule::getStatus, 1)
+                .orderByAsc(Schedule::getShowDate)
+                .orderByAsc(Schedule::getShowTime);
+
+        List<Schedule> schedules = scheduleMapper.selectList(wrapper);
+
+        // 按日期-时间分组
+        Map<String, List<ScheduleListItemVO>> result = new HashMap<>();
+
+        for (Schedule schedule : schedules) {
+            // 获取时间段的起始小时，取整到两小时时间段
+            int hour = schedule.getShowTime().getHour();
+            int roundedHour = (hour / 2) * 2;
+            String timeSlot = String.format("%02d:00", roundedHour);
+
+            String key = schedule.getShowDate() + "-" + timeSlot;
+
+            List<ScheduleListItemVO> list = result.computeIfAbsent(key, k -> new ArrayList<>());
+            list.add(convertToListItemVO(schedule));
+        }
+
+        return result;
+    }
+
     /**
      * 转换为列表项VO
      */

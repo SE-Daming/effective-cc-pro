@@ -103,4 +103,14 @@ public interface ScheduleService {
      */
     ScheduleConflictCheckVO checkConflict(ScheduleConflictCheckRequest request);
 
+    /**
+     * 获取排片日历数据（B端）
+     *
+     * @param startDate 开始日期
+     * @param endDate   结束日期
+     * @return 日历数据（key为"日期-时间"格式，value为排片列表）
+     */
+    java.util.Map<String, java.util.List<ScheduleListItemVO>> getScheduleCalendar(
+            String startDate, String endDate);
+
 }

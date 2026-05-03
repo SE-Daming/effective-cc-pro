@@ -15,6 +15,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * B端排片管理控制器
  *
@@ -78,6 +81,17 @@ public class AdminScheduleController {
     @PostMapping("/check-conflict")
     public Result<ScheduleConflictCheckVO> checkConflict(@RequestBody ScheduleConflictCheckRequest request) {
         return Result.success(scheduleService.checkConflict(request));
+    }
+
+    /**
+     * 获取排片日历数据
+     */
+    @Operation(summary = "获取排片日历数据", description = "获取指定日期范围内的排片日历数据")
+    @GetMapping("/calendar")
+    public Result<Map<String, List<ScheduleListItemVO>>> getScheduleCalendar(
+            @Parameter(description = "开始日期") @RequestParam String startDate,
+            @Parameter(description = "结束日期") @RequestParam String endDate) {
+        return Result.success(scheduleService.getScheduleCalendar(startDate, endDate));
     }
 
 }

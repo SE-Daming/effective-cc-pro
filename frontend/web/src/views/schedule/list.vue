@@ -156,8 +156,8 @@ const fetchData = async () => {
 const fetchOptions = async () => {
   try {
     const [cinemaRes, movieRes] = await Promise.all([
-      getCinemaList({ pageSize: 1000 }),
-      getMovieList({ pageSize: 1000 })
+      getCinemaList({ page: 1, pageSize: 100 }),
+      getMovieList({ page: 1, pageSize: 100 })
     ])
     cinemaOptions.value = cinemaRes.data.list
     movieOptions.value = movieRes.data.list
